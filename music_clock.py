@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """E-510 overlay on the hex split. One Wave names only.
 
-6 pyramids × {Express, Compress} = 12 clock slots.
+6 notes. Those 6 are the mirror notes.
+6 pyramids × {Express, Compress} = 12 clock slots (views, not 12 animals).
 Express ↔ Compress is Mirror (B-205) through the plane.
 Opposite pyramids share a midline. That is the 3.
 Tritone is a Gray sticker. It is not an ID.
 """
 from __future__ import annotations
 
-# Optional Gray stickers. Peel them. They do not organize the clock.
 GRAY_STICKERS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
 
@@ -54,7 +54,8 @@ def main() -> None:
     for a, b in midlines(ps):
         print(f"  P{a} — P{b}")
     print()
-    print("law: Express ↔ Compress = Mirror. Not a Gray interval.")
+    print("law: 6 notes. Those 6 are the mirror notes.")
+    print("      Express ↔ Compress = Mirror on the same note.")
     print("hold: 1(0)1")
 
 
