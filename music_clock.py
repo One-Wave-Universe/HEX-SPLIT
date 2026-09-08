@@ -1,41 +1,61 @@
 #!/usr/bin/env python3
-"""E-510 music clock sitting on the hex split.
+"""E-510 overlay on the hex split. One Wave names only.
 
-6 pyramids × 2 (face + flip) = 12 pitch classes.
-Opposite pyramids share a midline — the M4 clock axis in this toy.
+6 pyramids × {Express, Compress} = 12 clock slots.
+Express ↔ Compress is Mirror (B-205) through the plane.
+Opposite pyramids share a midline. That is the 3.
+Tritone is a Gray sticker. It is not an ID.
 """
 from __future__ import annotations
 
-NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-
-# pyramid i owns NOTES[i] and its tritone NOTES[i+6]
-PYRAMIDS = [
-    {"id": i + 1, "face": NOTES[i], "flip": NOTES[i + 6], "opposite": ((i + 3) % 6) + 1}
-    for i in range(6)
-]
+# Optional Gray stickers. Peel them. They do not organize the clock.
+GRAY_STICKERS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
 
-def fifths_walk(start: str = "C") -> list[str]:
-    idx = NOTES.index(start)
-    return [NOTES[(idx + 7 * k) % 12] for k in range(12)]
+def pyramids() -> list[dict]:
+    out = []
+    for i in range(6):
+        pid = i + 1
+        out.append(
+            {
+                "id": pid,
+                "express": f"E{pid}",
+                "compress": f"C{pid}",
+                "opposite": ((i + 3) % 6) + 1,
+                "gray_face_sticker": GRAY_STICKERS[i],
+                "gray_flip_sticker": GRAY_STICKERS[i + 6],
+            }
+        )
+    return out
+
+
+def midlines(ps: list[dict]) -> list[tuple[int, int]]:
+    seen = set()
+    pairs = []
+    for p in ps:
+        pair = tuple(sorted((p["id"], p["opposite"])))
+        if pair not in seen:
+            seen.add(pair)
+            pairs.append(pair)
+    return pairs
 
 
 def main() -> None:
-    print("HEX-SPLIT music clock")
-    print("pyramid  face  flip  opposite")
-    for p in PYRAMIDS:
-        print(f"  P{p['id']}     {p['face']:<3}  {p['flip']:<3}  P{p['opposite']}")
+    ps = pyramids()
+    print("HEX-SPLIT music clock — One Wave")
+    print("pyramid  express  compress  midline  [gray stickers, optional]")
+    for p in ps:
+        print(
+            f"  P{p['id']}     {p['express']:<3}     {p['compress']:<3}      P{p['opposite']}"
+            f"     {p['gray_face_sticker']}/{p['gray_flip_sticker']}"
+        )
     print()
-    print("circle of fifths from C:", " ".join(fifths_walk()))
+    print("midlines (M4 candidates — pick one, freeze):")
+    for a, b in midlines(ps):
+        print(f"  P{a} — P{b}")
     print()
-    print("midline pairs (M4 candidates):")
-    seen = set()
-    for p in PYRAMIDS:
-        pair = tuple(sorted((p["id"], p["opposite"])))
-        if pair in seen:
-            continue
-        seen.add(pair)
-        print(f"  P{pair[0]} — P{pair[1]}   {PYRAMIDS[pair[0]-1]['face']}/{PYRAMIDS[pair[0]-1]['flip']} vs {PYRAMIDS[pair[1]-1]['face']}/{PYRAMIDS[pair[1]-1]['flip']}")
+    print("law: Express ↔ Compress = Mirror. Not a Gray interval.")
+    print("hold: 1(0)1")
 
 
 if __name__ == "__main__":
