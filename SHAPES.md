@@ -2,6 +2,21 @@
 
 Stay on target.
 
+## The unit
+
+```
+1 hexagon  =  6 cells  =  6 pyramids
+```
+
+One cut from the centroid. Six triangles on the floor. Each triangle is a **cell**. Stand the cell up and it is a **pyramid**. Not six hexes. Not six worlds. One slice, six rooms.
+
+Shared apex (one mountain) or six tents — still six cells, still one hexagon.
+Opposite cells share a midline. That is the 3. Face × flip of those six is the 12.
+
+A cell you have not stood up is still a cell. A pyramid is the cell doing height. Do not count them twice.
+
+## Jobs
+
 ```
 hex     = the slice     (neighbors in a plane)
 cube    = the stack     (slices piled; a cell you can count)
@@ -22,8 +37,9 @@ You can print this. You can count 6. You cannot spin a slice and call it a world
 Slices piled until you have thickness. Cell → cube → Rubik on the GCAC ladder.
 The stack is how 2D six-fold stands toward D-409 twelve-fold without pretending the plane was already a ball.
 
-A cube has a hold belt in the middle of a layer: `1(0)1`. You do not divide Ground when you stack. You add a floor.
+You stack **hexes** (floors), not the six cells into a fake cube. The six cells already *are* one hexagon. Piling six pyramids and calling it “the cube” smashes slice into stack.
 
+A stacked floor keeps `1(0)1`. You do not divide Ground when you add a floor.
 If stacking changes the dead-zone width, you stacked wrong — you divided the hold.
 
 ## Sphere — rotation
@@ -39,8 +55,10 @@ Quaternion is the engineering object for this job. Do not import Hamilton and ca
 
 | if you say | you are doing |
 |---|---|
+| six hexagons | you counted the rooms as buildings |
+| six cells plus six pyramids | you counted height twice |
 | hex = space | skipping the stack |
-| cube = the world | skipping rotation |
+| cube = the six cells | skipping the next floor |
 | sphere = 12-clock | mixing D-411 jobs |
 | stack by dividing hold | illegal |
 
@@ -52,3 +70,4 @@ This file is which **shape** is allowed to speak on which floor.
 - A hex print behaves like a sphere lock with no stack in between — slice stole rotation.
 - Stacking cells changes GCAC dead width — hold was not invariant.
 - Sphere math (quat 4π) and lattice `lap` disagree on a closed trip — sheet dropped.
+- Counting 12 rooms on one un-flipped hexagon — you invented the flip without the plane.
