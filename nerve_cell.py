@@ -2,7 +2,7 @@
 """Three-winding nerve cell — kickable model.
 
 BC-DC engage. TC-AC lean on ONE live winding. QC-RC one flip both ways.
-Windings ARE memory. Mid / I_G is vagus. Not a linear conveyor.
+Windings ARE memory. Mid / I_G is vagus. Hold = no drive, not empty memory.
 """
 from __future__ import annotations
 
@@ -41,6 +41,7 @@ class NerveCell:
     engage: int = 0
     live: int = 0
     seq: int = 0
+    lean: float = 0.0
 
     def i_g(self) -> float:
         return sum(self.w)
@@ -52,40 +53,41 @@ class NerveCell:
         return 1 if x > 0 else -1
 
     def stamp_of(self) -> str:
-        if self.engage == 0:
+        if self.engage == 0 or abs(self.lean) < BELT:
             return "hold"
-        return "hold" if self.ternary() == 0 else "commit"
+        return "commit"
 
     def tick(self, engage: int, live: int, lean: float) -> Receipt:
         self.engage = 1 if engage else 0
         self.live = int(live) % 3
-        lean = clamp(float(lean), -1.0, 1.0)
+        self.lean = clamp(float(lean), -1.0, 1.0)
         prev = list(self.w)
 
         for i in range(3):
             if i != self.live:
                 self.w[i] *= 1.0 - SHUT
 
-        if self.engage == 0 or abs(lean) < BELT:
+        if self.engage == 0 or abs(self.lean) < BELT:
             self.w[self.live] *= 1.0 - DECAY
             self.g += DT * (-self.g / TAU)
         else:
-            self.w[self.live] += DT * (lean - self.w[self.live]) / TAU
+            self.w[self.live] += DT * (self.lean - self.w[self.live]) / TAU
             self.g += DT * (self.i_g() - self.g) / TAU
 
         action = tuple(self.w[i] - prev[i] for i in range(3))
         views = tuple(self.w)
         self.seq += 1
         st = self.stamp_of()
+        tern = 0 if st == "hold" else (1 if self.lean > 0 else -1)
         return Receipt(
             seq=self.seq,
             engage=self.engage,
             live_gate=self.live,
-            lean=lean,
+            lean=self.lean,
             i_g=self.i_g(),
             g=self.g,
             windings=views,
-            ternary=0 if st == "hold" else self.ternary(),
+            ternary=tern,
             stamp=st,
             views=views,
             action=action,
@@ -126,7 +128,7 @@ def demo() -> None:
     print()
     print("memory after lean-then-hold w0", round(hold.views[0], 3))
     print("vagus I_G", round(hold.i_g, 3), "g", round(hold.g, 3))
-    print("law: process is memory. one flip both ways. others shut.")
+    print("law: process is memory. hold is no drive. others shut.")
     print("hold: 1(0)1")
 
 
