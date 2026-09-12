@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Clock sync protocol — kickable state machine.
-
-See SYNC.md. This file is the wire, not the cosmology.
-"""
+"""Clock sync — wire only. Stamp is stamp. No Gate-7 noun."""
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -16,13 +13,17 @@ GEN_FOURTH = 5
 GEN_TRITONE = 6
 GEN_FIFTH = 7
 
-Gate7 = Literal["propose", "commit", "hold", "quit"]
+Stamp = Literal["propose", "commit", "hold", "quit"]
 State = Literal["LISTEN", "LOCK", "HOLD", "DRIFT", "QUIT"]
 PAIRS = ((1, 4), (2, 5), (3, 6))
 
 
 def wrap12(n: int) -> int:
     return n % 12
+
+
+def _stamp_of(pkt) -> str:
+    return getattr(pkt, "stamp", None) or getattr(pkt, "gate7", "hold")
 
 
 @dataclass
@@ -36,7 +37,7 @@ class Packet:
     m4_pair: int = 0
     lap: int = 0
     hold: bool = True
-    gate7: Gate7 = "hold"
+    stamp: Stamp = "hold"
     tonic: str = "C"
 
     def slot(self) -> dict:
@@ -109,7 +110,7 @@ class Coordinator:
         self.seq += 1
         return self._emit("quit")
 
-    def _emit(self, gate7: Gate7) -> Packet:
+    def _emit(self, stamp: Stamp) -> Packet:
         return Packet(
             src=self.src,
             seq=self.seq,
@@ -118,8 +119,8 @@ class Coordinator:
             generator=self.generator,
             m4_pair=self.m4_pair,
             lap=self.lap,
-            hold=self.hold or gate7 in ("hold", "quit"),
-            gate7=gate7,
+            hold=self.hold or stamp in ("hold", "quit"),
+            stamp=stamp,
         )
 
 
@@ -134,19 +135,20 @@ class Follower:
     generator: int = GEN_FIFTH
 
     def hear(self, pkt: Packet) -> State:
-        if pkt.gate7 == "quit":
+        st = _stamp_of(pkt)
+        if st == "quit":
             self.state = "QUIT"
             return self.state
-        if pkt.gate7 == "propose":
+        if st == "propose":
             return self.state
-        if pkt.gate7 == "hold" or pkt.hold or pkt.polarity == 0:
+        if st == "hold" or pkt.hold or pkt.polarity == 0:
             if self.state != "QUIT":
                 self.state = "HOLD"
             self.phase = pkt.phase
             self.lap = pkt.lap
             self.last_seq = pkt.seq
             return self.state
-        if pkt.gate7 != "commit":
+        if st != "commit":
             return self.state
         if pkt.m4_pair != self.m4_pair and self.last_seq >= 0:
             self.m4_pair = pkt.m4_pair
@@ -179,12 +181,12 @@ def demo() -> None:
     m4 = Coordinator()
     bucket = Follower()
     print("CLOCK SYNC  proto=one-wave-clock/1  gen=+7")
-    print(f"{'seq':>4} {'g7':<7} {'ph':>3} {'pol':>4} {'hold':>5} {'lap':>3} {'follow'}")
+    print(f"{'seq':>4} {'stamp':<7} {'ph':>3} {'pol':>4} {'hold':>5} {'lap':>3} {'follow'}")
 
     def show(pkt: Packet) -> None:
         st = bucket.hear(pkt)
         print(
-            f"{pkt.seq:4d} {pkt.gate7:<7} {pkt.phase:3d} {pkt.polarity:4d} "
+            f"{pkt.seq:4d} {pkt.stamp:<7} {pkt.phase:3d} {pkt.polarity:4d} "
             f"{str(pkt.hold):>5} {pkt.lap:3d} {st}"
         )
 
