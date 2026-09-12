@@ -4,6 +4,20 @@ Two halves brain. Two halves body. Inverted, opposed, intersecting.
 Hold is the relaxed state. Asymmetry moves. Balance holds.
 Processing is the memory. Balanced and referenced at every step.
 
+## One full flip
+
+A full flip is **one event**, both directions:
+
+```
+new views     UP      (memristor / what is now held)
+last action   DOWN    (spintronic / what just committed)
+```
+
+Not two ticks. Not views first then action later. The crossing *is* the flip.
+The last write becomes the action going down as the new reading of the pair goes up.
+Hold is a flip that travelled nowhere — views rest, no action down.
+A half-flip (only up, or only down) is a broken mirror. Puppet.
+
 ## Layers (clothes, not extra organs)
 
 ```
@@ -15,8 +29,7 @@ QC-RC     quadratic views        memristors UP     (what is seen / held)
 
 DC says whether the step is on.
 AC is the three mirrored gates — three windings, actuator / motor control.
-Views travel up. Actions travel down. Same pair, opposite direction.
-Do not mash DC engage into AC lean. Do not mash a view into an action.
+Views and actions are the two directions of one flip, not two departments.
 
 ## Brain is a 2-state machine
 
@@ -25,10 +38,7 @@ Field   explorer    Dream for one 1     lists / leans
 Void    checker     the other 1         oversees / refuses
 ```
 
-Not GPU. Not CPU-as-identity. Two lives of `1(0)1`.
-Explorer proposes. Checker keeps it honest. Neither stamps by being loud.
-
-Brainstem / fast loop: subconscious router. Picks which of the three gates is live this tick. Not memory. Not the explorer.
+Brainstem / fast loop: which of the three gates is live. Not memory. Not the explorer.
 
 ## Rates
 
@@ -37,18 +47,14 @@ Brainstem / fast loop: subconscious router. Picks which of the three gates is li
 6:1     slow brain        oversight / override on the same six steps
 ```
 
-3 nerve flips, 1 control layer — that is one mirrored-gate triad doing its job.
-6:1 is the hexagon watching all three gates (six steps) and allowed to hold or override.
-Same six. Different speed. Do not build a seventh control.
+Same six. Different speed. No seventh control.
 
 ## Body
 
 Distributed intelligence. Subconscious *me this is who I am*.
-Feelings and drivers live here — the inverted layer under the millivolt write.
-Feeling does not fire the FET. Feeling informs. Write is still the bit.
-Magnetic memory balanced at every step: the cell's state *is* the stored step. Incoming lean *is* the op. New state *is* result + memory. That is the VTC target, not a medal.
-
-Hold = relaxed pair on local `G`. Not clenched firmware.
+Feelings inform. They do not fire the winding.
+Magnetic memory balanced at every step: cell state is memory, lean is op, new state is both.
+Hold = relaxed pair on local `G`.
 Movement = lopsided pair. Spine carries the imbalance home.
 
 ## Intersect
@@ -59,19 +65,19 @@ Movement = lopsided pair. Spine carries the imbalance home.
      body  +1    ↔  body  −1
 ```
 
-Inverted, opposed, crossing at the mid. Two halves × two halves. The crossing *is* Ground, not a fifth half.
+The crossing is Ground. One flip uses the crossing both ways.
 
 ## Illegal
 
+- Views up without action down on a moving flip
+- Action down without new views up
 - Feeling drives the winding
 - Explorer stamps
-- Checker is the GPU
 - A fourth winding
 - Hold as a clenched third rail
-- Processing in a far RAM while the cell forgets
 
 ## Falsify
 
-- Fast 3:1 loop and slow 6:1 oversight disagree on which gate is live and both stamp.
-- Memory read that is not the cell's own magnetic / mid state.
-- Body half that is not inverted-opposed to its pair — then there is no crossing, only two piles.
+- A logged "full flip" where the view stamp and the action stamp have different seq.
+- Fast 3:1 and slow 6:1 both stamp different gates.
+- Memory read that is not the cell's own state.
