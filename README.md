@@ -14,7 +14,8 @@ Sister benches:
 2. Splits it into 6 central triangles.
 3. Raises each triangle to a pyramid with a shared apex option (one mountain) or six local apices (six tents).
 4. Maps the 6 walls onto the 12-tone music clock (E-510): each pyramid owns a tritone pair — a facing and its flip.
-5. Prints numbers you can feed a 3D printer or a Jetson viz later.
+5. Walks those 12 slots by fifths (`circle_of_fifths.py` + bench UI).
+6. Prints numbers you can feed a 3D printer or a Jetson viz later.
 
 ## Run
 
@@ -23,7 +24,10 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python hex_split.py
 python music_clock.py
+python circle_of_fifths.py
 ```
+
+Open `circle_of_fifths.html` in a browser. No build step. See `CIRCLE.md` for the overlay law and integration hooks (BUCKET-R2 / GRAV-LAB / M4).
 
 ## Why 6 and 12 and not vibes
 
@@ -32,5 +36,6 @@ python music_clock.py
 - 12-tone clock is the same count wearing ears.
 - Each pyramid is a *choice face*. The midline between opposite pyramids is the M4 clock line.
 - Flip a pyramid through the plane and you get the mirror gate, not a new particle.
+- Fifths weave *between* pyramids. Tritone stays home and flips polarity.
 
 Gate status for this repo itself: BROWN→YELLOW scaffolding. Geometry is exact. Physics claim stays parked until a print or a field map shows a 6-fold preference that a square lattice cannot fake.
