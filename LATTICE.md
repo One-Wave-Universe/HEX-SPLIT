@@ -24,6 +24,17 @@ site = { facing, polarity, sheet, κ }
 
 No second substance called time. Time is the cost of moving through this.
 
+## Shapes (jobs, not three worlds)
+
+```
+hex     = the slice     — neighbors in a plane
+cube    = the stack     — slices piled; a cell you can count
+sphere  = the rotation  — the stack allowed to turn
+```
+
+Full law: `SHAPES.md`.
+Hex without stack is a floor plan. Stack without rotation is a brick. Sphere without hex is a ball with no neighbors.
+
 ## Time, on target
 
     τ = ∫ κ |ds|
@@ -62,6 +73,7 @@ Do **not**:
 - glue B-lobes to +7 until a print beats a square
 - call κ settled
 - let GPU dream packets commit phase
+- let a sphere steal the slice's job
 
 ## Falsify
 
@@ -69,13 +81,15 @@ Do **not**:
 2. Phase advances on hold.
 3. Hex print ≡ square print (crystal was the magnet shape).
 4. Child with no alignment channel locks on the same clock as an aligned twin (GRAV-LAB already holds this).
+5. Hex print acts like a sphere lock with no stack in between — slice stole rotation.
 
 Until one of those is run, this stays YELLOW.
 
 ## Homes
 
-- HEX-SPLIT — floor plan + 12 slots + this file
-- GRAV-LAB — lock servo on the fluid
+- HEX-SPLIT — floor plan + 12 slots + this file + SHAPES.md
+- GRAV-LAB — lock servo + SCALE_LADDER floors
+- POINT-SPIN — rotation object (4π)
 - GCAC — millivolt write / dead belt
 - BUCKET-R2 — one gray sticker per earned move
 - SYNC.md — who may commit a step
