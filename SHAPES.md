@@ -15,6 +15,26 @@ Opposite cells share a midline. That is the 3. Face × flip of those six is the 
 
 A cell you have not stood up is still a cell. A pyramid is the cell doing height. Do not count them twice.
 
+## Flip is the baseline zero
+
+Not an empty hole. Not a missing pyramid. The **connected** zero.
+
+```
+1  (0)  1
+   flip
+```
+
+The two `1`s are Express and Compress of the **same** cell. The `(0)` is the through-plane join that makes them one site. That pair is Ground. You measure from the flip, not from a lonely origin off the hexagon.
+
+- Hold is sitting **on** the flip — polarity 0 means you have not chosen a face. You have not left the pair.
+- Flip is not a seventh pyramid and not a fourth hallway.
+- +6 stays home and crosses the zero. +7 leaves the pair and weaves a wall.
+- `lap` / 4π is the same zero read as wind, not a second Ground.
+
+If you put zero *between* two different pyramids, you invented a ditch. Zero lives inside one cell, connecting its two readings.
+
+GCAC dead belt is how a write *feels* that zero. Do not replace the MOSFET hold with a drawing of a flip. Same job, two floors: gate belt / slice pair.
+
 ## Pyramids connect
 
 They are not six lonely tents. Four joins, four jobs:
@@ -23,15 +43,15 @@ They are not six lonely tents. Four joins, four jobs:
 wall     P_n shares a radial wall with P_{n+1}     adjacency (the 6-ring)
 apex     all six meet at the mountain              one site, six faces
 midline  P_n — P_{n+3}                             the 3 hallways; M4 freezes one
-flip     P_n Express — P_n Compress                same pyramid, other sheet-face
+flip     P_n Express — P_n Compress                BASELINE ZERO — connected Ground
 ```
 
 - **Wall** is how a write walks the ring without leaving the slice.
 - **Apex** is shared only in mountain mode. Tents mode parks the common point — cells still neighbor by walls. If tents stop talking through walls, you broke the hexagon.
 - **Midline** is not a wall. It is the through-line. Opposite pyramids do not share an edge. They share a *hallway*. Blur two midlines and M4 has no pair to freeze.
-- **Flip** is not a seventh pyramid. It is the same cell read through the plane.
+- **Flip** is the new baseline. Same cell, through the plane. Connected zero.
 
-Fifths (+7) *weave* walls: you leave one pyramid for another. Tritone (+6) *stays* and flips. That is already the clock. Do not invent a fifth join.
+Fifths (+7) *weave* walls: you leave one pyramid for another. Tritone (+6) *stays* and crosses zero. That is already the clock. Do not invent a fifth join.
 
 Stack connects **floors** (hex to hex), not pyramid to a new species. Rotation turns the joins; it does not add a join.
 
@@ -59,7 +79,7 @@ The stack is how 2D six-fold stands toward D-409 twelve-fold without pretending 
 
 You stack **hexes** (floors), not the six cells into a fake cube. The six cells already *are* one hexagon. Piling six pyramids and calling it “the cube” smashes slice into stack.
 
-A stacked floor keeps `1(0)1`. You do not divide Ground when you add a floor.
+A stacked floor keeps `1(0)1` — the `(0)` is still the flip pair of that floor's cells. You do not divide Ground when you add a floor.
 If stacking changes the dead-zone width, you stacked wrong — you divided the hold.
 
 ## Sphere — rotation
@@ -79,6 +99,8 @@ Quaternion is the engineering object for this job. Do not import Hamilton and ca
 | six cells plus six pyramids | you counted height twice |
 | six disconnected tents | you deleted the walls |
 | midline = wall | you gave M4 an edge it does not have |
+| zero between two pyramids | you dug a ditch; zero lives in one cell |
+| flip = empty | you deleted the connected Ground |
 | hex = space | skipping the stack |
 | cube = the six cells | skipping the next floor |
 | sphere = 12-clock | mixing D-411 jobs |
@@ -94,3 +116,4 @@ This file is which **shape** is allowed to speak on which floor.
 - Sphere math (quat 4π) and lattice `lap` disagree on a closed trip — sheet dropped.
 - Counting 12 rooms on one un-flipped hexagon — you invented the flip without the plane.
 - Tents print shows no shared-wall strain while mountain does — then apex was doing all the connecting and the ring was a drawing.
+- Hold advances phase — you left the flip and called it zero.
